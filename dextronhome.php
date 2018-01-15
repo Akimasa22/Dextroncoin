@@ -5,20 +5,7 @@
     set_time_limit(0);
     $outValue = array();
     $customerid = filter_input(INPUT_GET, 'username');
-    $host = 'localhost';
-    $uname = 'dextronc_root';
-    $pwd = '@dextron0909';
-    $db = "dextronc_oininfo";
-     $currency = 'USD';
-    $ch = curl_init();
-    $con = mysqli_connect($host, $uname, $pwd) or die("connection failed");
-    mysqli_select_db($con, $db) or die("db selection failed");
-    curl_setopt($ch, CURLOPT_URL, "https://blockchain.info/ticker");
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    $pri = json_decode(curl_exec($ch), true);
-    curl_close($ch);
-    $price = $pri[$currency]['15m'];
-   
+ 
     $datac ='https://api.coinbase.com/v2/prices/ETH-' . $currency . '/spot';
    // $ethcurrentpeice = $datac['data']['amount'];
  $chs = curl_init();
@@ -29,54 +16,7 @@ $CC=curl_exec($chs);
 $json = json_decode($CC,true);
  $ethcurrentpeice=$json['data']['amount'];
  
-    $sums = 0;
-    $btcusd = 0;
-    $tx = "";
-    $dtcamount = 0.0;
-    $dtcamounts = 0.0;
-    $name = "";
-    $walletid = mysqli_fetch_array(mysqli_query($con, "select * from coin2 where usern='$customerid'"));
-    $target_address = $walletid['walletid'];
-    if ($target_address == null) {
-        $sums = "0.000000";
-    } elseif ($target_address != null) {
-
-        curl_setopt($ch, CURLOPT_URL, "https://blockchain.info/address/" . $target_address . "?format=json&offset=0");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $json = json_decode(curl_exec($ch), true);
-        curl_close($ch);
-        $totalTxs = $json['final_balance'];
-       
-            $sums = ($totalTxs-$btcsss) / 100000000;
-        $btcusd = (double) ($sums * $price) / 1.000000000;
-    }
-    $dt = $price;
-    $dct = (double) (0.65 * 1.000000000) / $dt;
-    $dtcamount = 0;
-    $dtcamounts = 0.0;
-    $Username = $customerid; 
-    $name = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM registration where username='$customerid'")) or die(mysql_error());
-    $names = $name['names'];
-       
-        $ethw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM ethcoin where usern='$customerid'"));
-   
-
-    $ethws = $ethw['walletid'];
-
-    if ($ethws == null || $ethws == "") {
-        $urls = "0.000000";
-    } else {
-         $resultw = mysqli_query($con, "SELECT sum(etha) FROM ethcoin where usern='$customerid'");
-    while ($r = mysqli_fetch_array($resultw)) {
-        $urls = $r['sum(etha)'];
-    }
-  $rs = mysqli_query($con, "SELECT sum(dtca) FROM ethcoin where usern='$customerid'");
-    while ($rd = mysqli_fetch_array($rs)) {
-        $u = $rd['sum(dtca)'];
-    }
-      $dtcamounts = $dtcamount +$u* 0.65;
-   }    
-    ?>
+ 
 
     <!-- Mirrored from blackrockdigital.github.io/startbootstrap-sb-admin/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 23 Dec 2017 10:51:50 GMT -->
     <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
