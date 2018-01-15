@@ -17,12 +17,12 @@ if ($usern != null) {?>
        
         $secret = mt_rand();
 
-        $my_xpub = 'xpub6CkpYo3vMPabSjDHGXJhb252RMHYdFaVHZmmi9NcccMFpBNj4AUc5opjumG3q95oC9EX4WfWh7mUqQoMnqqSERWYuC1ep34CPJAmTvwBrh7';
-        $my_api_key = 'b7a9ad83-cd29-44e1-a8fc-a316b93dd4eb';
+        $my_xpub = '';
+        $my_api_key = '';
 
         $my_callback_url = "https://dextroncoin.info/response.php?invoice_id=" . $usern . "&secret=" . $secret;
 
-        $root_url = 'https://api.blockchain.info/v3/receive';
+        $root_url = '';
 
         $parameters = 'xpub=' . $my_xpub . '&callback=' . urlencode($my_callback_url) . '&key=' . $my_api_key;
 
