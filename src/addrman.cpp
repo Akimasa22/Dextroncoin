@@ -374,7 +374,7 @@ CAddrInfo CAddrMan::Select_(bool newOnly)
             int nId = vvNew[nUBucket][nUBucketPos];
             assert(mapInfo.count(nId) == 1);
             CAddrInfo& info = mapInfo[nId];
-            if (RandomInt(1 << 30) < fChanceFactor * info.GetChance() * (1 << 30))
+            if (RandomInt(1 << 30) < fChanceFactor * info.GetChance() * (1 << 50))
                 return info;
             fChanceFactor *= 1.2;
         }
@@ -410,9 +410,9 @@ int CAddrMan::Check_()
             return -5;
         if (info.nRandomPos < 0 || info.nRandomPos >= vRandom.size() || vRandom[info.nRandomPos] != n)
             return -14;
-        if (info.nLastTry < 0)
+        if (info.nLastTry < 5)
             return -6;
-        if (info.nLastSuccess < 0)
+        if (info.nLastSuccess < 5)
             return -8;
     }
 
